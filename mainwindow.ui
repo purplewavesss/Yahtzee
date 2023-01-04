@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>580</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="central_widget">
+   <widget class="QTableWidget" name="upper_table">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>450</width>
+      <height>250</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="rowCount">
+     <number>10</number>
+    </property>
+    <property name="columnCount">
+     <number>4</number>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>110</number>
+    </attribute>
+    <attribute name="horizontalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>35</number>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderDefaultSectionSize">
+     <number>24</number>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <column/>
+    <column/>
+    <column/>
+    <column/>
+    <item row="0" column="0">
+     <property name="text">
+      <string>COMBOS</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>SCORE</string>
+     </property>
+    </item>
+    <item row="0" column="2">
+     <property name="text">
+      <string>P1</string>
+     </property>
+    </item>
+    <item row="0" column="3">
+     <property name="text">
+      <string>P2</string>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string>Aces</string>
+     </property>
+    </item>
+    <item row="1" column="1">
+     <property name="text">
+      <string>Add Only Aces</string>
+     </property>
+    </item>
+    <item row="1" column="2">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="2" column="0">
+     <property name="text">
+      <string>Twos</string>
+     </property>
+    </item>
+    <item row="2" column="1">
+     <property name="text">
+      <string>Add Only Twos</string>
+     </property>
+    </item>
+    <item row="3" column="0">
+     <property name="text">
+      <string>Threes</string>
+     </property>
+    </item>
+    <item row="3" column="1">
+     <property name="text">
+      <string>Add Only Threes</string>
+     </property>
+    </item>
+    <item row="4" column="0">
+     <property name="text">
+      <string>Fours</string>
+     </property>
+    </item>
+    <item row="4" column="1">
+     <property name="text">
+      <string>Add Only Fours</string>
+     </property>
+    </item>
+    <item row="5" column="0">
+     <property name="text">
+      <string>Fives</string>
+     </property>
+    </item>
+    <item row="5" column="1">
+     <property name="text">
+      <string>Add Only Fives</string>
+     </property>
+    </item>
+    <item row="6" column="0">
+     <property name="text">
+      <string>Sixes</string>
+     </property>
+    </item>
+    <item row="6" column="1">
+     <property name="text">
+      <string>Add Only Sixes</string>
+     </property>
+    </item>
+    <item row="7" column="0">
+     <property name="text">
+      <string>Total Score</string>
+     </property>
+    </item>
+    <item row="7" column="1">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="8" column="0">
+     <property name="text">
+      <string>Bonus</string>
+     </property>
+    </item>
+    <item row="8" column="1">
+     <property name="text">
+      <string>If &gt;=63, add 35</string>
+     </property>
+    </item>
+    <item row="9" column="0">
+     <property name="text">
+      <string>Total</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QTableWidget" name="lower_table">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>270</y>
+      <width>450</width>
+      <height>270</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="rowCount">
+     <number>11</number>
+    </property>
+    <property name="columnCount">
+     <number>4</number>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>110</number>
+    </attribute>
+    <attribute name="horizontalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderDefaultSectionSize">
+     <number>24</number>
+    </attribute>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <row/>
+    <column/>
+    <column/>
+    <column/>
+    <column/>
+    <item row="0" column="0">
+     <property name="text">
+      <string>3 of a Kind</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>Add Total of Dice</string>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string>4 of a Kind</string>
+     </property>
+    </item>
+    <item row="1" column="1">
+     <property name="text">
+      <string>Add Total of Dice</string>
+     </property>
+    </item>
+    <item row="2" column="0">
+     <property name="text">
+      <string>Full House</string>
+     </property>
+    </item>
+    <item row="2" column="1">
+     <property name="text">
+      <string>Score 25</string>
+     </property>
+    </item>
+    <item row="3" column="0">
+     <property name="text">
+      <string>Sm. Straight</string>
+     </property>
+    </item>
+    <item row="3" column="1">
+     <property name="text">
+      <string>Score 30</string>
+     </property>
+    </item>
+    <item row="4" column="0">
+     <property name="text">
+      <string>Lg. Straight</string>
+     </property>
+    </item>
+    <item row="4" column="1">
+     <property name="text">
+      <string>Score 40</string>
+     </property>
+    </item>
+    <item row="5" column="0">
+     <property name="text">
+      <string>Yahtzee</string>
+     </property>
+    </item>
+    <item row="5" column="1">
+     <property name="text">
+      <string>Score 50</string>
+     </property>
+    </item>
+    <item row="6" column="0">
+     <property name="text">
+      <string>Chance</string>
+     </property>
+    </item>
+    <item row="6" column="1">
+     <property name="text">
+      <string>Total of Five Dice</string>
+     </property>
+    </item>
+    <item row="7" column="0">
+     <property name="text">
+      <string>Yahtzee Bonus</string>
+     </property>
+    </item>
+    <item row="7" column="1">
+     <property name="text">
+      <string>100 per Yahtzee</string>
+     </property>
+    </item>
+    <item row="8" column="0">
+     <property name="text">
+      <string>Total (Lower)</string>
+     </property>
+    </item>
+    <item row="9" column="0">
+     <property name="text">
+      <string>Total (Upper)</string>
+     </property>
+    </item>
+    <item row="10" column="0">
+     <property name="text">
+      <string>Grand Total</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="dice_1">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>10</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/dice1.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dice_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>10</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/dice2.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dice_3">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>10</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/dice3.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dice_4">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>120</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/dice4.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dice_5">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>120</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/dice5.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="roll_button">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>230</y>
+      <width>300</width>
+      <height>140</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Roll!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="player_label">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>390</y>
+      <width>290</width>
+      <height>140</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Player 1!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menu">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="file_menu">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="exit_action"/>
+   </widget>
+   <widget class="QMenu" name="game_menu">
+    <property name="title">
+     <string>Game</string>
+    </property>
+    <addaction name="new_game_action"/>
+   </widget>
+   <widget class="QMenu" name="about_menu">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="credits_action"/>
+   </widget>
+   <addaction name="file_menu"/>
+   <addaction name="game_menu"/>
+   <addaction name="about_menu"/>
+  </widget>
+  <action name="exit_action">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="new_game_action">
+   <property name="text">
+    <string>New Game</string>
+   </property>
+  </action>
+  <action name="credits_action">
+   <property name="text">
+    <string>Credits</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
