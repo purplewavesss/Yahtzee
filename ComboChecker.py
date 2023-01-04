@@ -23,7 +23,7 @@ class ComboChecker:
         fives = 0
         sixes = 0
         for die in self.dice_list:
-            match die.number:
+            match die.get_number():
                 case 1:
                     aces += 1
                 case 2:

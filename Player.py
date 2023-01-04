@@ -14,8 +14,8 @@ class Player:
 
     def clear_point_items(self):
         for x in range(len(self.points_items_list)):
-            if self.points_items_list[x].status == "potential":
-                self.points_items_list[x].change_status("hidden")
+            if self.points_items_list[x].get_status() == "potential":
+                self.points_items_list[x].set_status("hidden")
 
 
 # This is the dumbest fix I have ever done

@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Dice import Dice
 from Player import Player
+from PlayerLabel import PlayerLabel
 from PointsItem import PointsItem
 from ScoreCard import ScoreCard
 
@@ -238,7 +239,7 @@ class UiMainWindow(object):
         self.roll_button = QtWidgets.QPushButton(self.central_widget)
         self.roll_button.setGeometry(QtCore.QRect(480, 230, 300, 140))
         self.roll_button.setObjectName("roll_button")
-        self.player_label = QtWidgets.QLabel(self.central_widget)
+        self.player_label = PlayerLabel(self.central_widget, player_list[0])
         self.player_label.setGeometry(QtCore.QRect(480, 390, 290, 140))
         font = QtGui.QFont()
         font.setPointSize(36)
@@ -268,18 +269,18 @@ class UiMainWindow(object):
         self.menu.addAction(self.file_menu.menuAction())
         self.menu.addAction(self.game_menu.menuAction())
         self.menu.addAction(self.about_menu.menuAction())
-        self.total_score_player_one.change_status("selected")
-        self.bonus_player_one.change_status("selected")
-        self.total_player_one.change_status("selected")
-        self.total_score_player_two.change_status("selected")
-        self.bonus_player_two.change_status("selected")
-        self.total_player_two.change_status("selected")
-        self.total_lower_player_one.change_status("selected")
-        self.total_upper_player_one.change_status("selected")
-        self.grand_total_player_one.change_status("selected")
-        self.total_lower_player_two.change_status("selected")
-        self.total_upper_player_two.change_status("selected")
-        self.grand_total_player_two.change_status("selected")
+        self.total_score_player_one.set_status("selected")
+        self.bonus_player_one.set_status("selected")
+        self.total_player_one.set_status("selected")
+        self.total_score_player_two.set_status("selected")
+        self.bonus_player_two.set_status("selected")
+        self.total_player_two.set_status("selected")
+        self.total_lower_player_one.set_status("selected")
+        self.total_upper_player_one.set_status("selected")
+        self.grand_total_player_one.set_status("selected")
+        self.total_lower_player_two.set_status("selected")
+        self.total_upper_player_two.set_status("selected")
+        self.grand_total_player_two.set_status("selected")
         self.retranslate_ui(main_window)
         QtCore.QMetaObject.connectSlotsByName(main_window)
 
