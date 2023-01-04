@@ -1,5 +1,4 @@
 import random
-from PyQt5 import QtCore, QtGui, QtWidgets
 from ComboChecker import ComboChecker
 from Dice import Dice
 from MainWindow import MainWindow
@@ -22,13 +21,7 @@ class Game:
         self.combo_checker: ComboChecker = ComboChecker(self.dice_list, self.current_player)
 
     def roll(self):
-        if self.current_player.roll_num >= 3:
-            if self.current_player.player_num == 1:
-                self.change_current_player(self.players[1])
-            else:
-                self.change_current_player(self.players[0])
-
-        self.current_player.can_click = True
+        self.current_player.roll_num += 1
         self.current_player.clear_point_items()
         for die in self.dice_list:
             if die.first_round:
@@ -36,6 +29,14 @@ class Game:
             if not die.locked:
                 die.change_number(random.randint(1, 6))
         self.display_items()
+        if self.current_player.roll_num > 3 or not self.current_player.can_click:
+            self.current_player.clear_point_items()
+            if self.current_player.player_num == 1:
+                self.change_current_player(self.players[1])
+            else:
+                self.change_current_player(self.players[0])
+            self.current_player.roll_num = 0
+            self.current_player.can_click = True
 
     def change_current_player(self, _current_player: Player):
         self.current_player = _current_player

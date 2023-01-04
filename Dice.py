@@ -10,7 +10,7 @@ class Dice(QtWidgets.QLabel):
         self.number: int = _number
         self.locked: bool = False
         self.first_round: bool = True
-        self.player.list: list[Player] = _player_list
+        self.player_list: list[Player] = _player_list
 
     def change_number(self, _number: int):
         self.number = _number
