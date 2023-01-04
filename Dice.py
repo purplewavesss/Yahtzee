@@ -3,14 +3,13 @@ from Player import Player
 
 
 class Dice(QtWidgets.QLabel):
-    def __init__(self, _parent: QtWidgets.QWidget, _pixmap: QtGui.QPixmap, _number: int, _player_list: list[Player]):
+    def __init__(self, _parent: QtWidgets.QWidget, _pixmap: QtGui.QPixmap, _number: int):
         super().__init__()
         self.setParent(_parent)
         self.setPixmap(_pixmap)
         self.__number: int = _number
         self.__locked: bool = False
         self.first_round: bool = True
-        self.player_list: list[Player] = _player_list
 
     def get_number(self) -> int:
         return self.__number
