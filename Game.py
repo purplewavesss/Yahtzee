@@ -1,16 +1,17 @@
 import random
+import Dice
+import MainWindow
+import Player
+import PointItem
 from ComboChecker import ComboChecker
-from Dice import Dice
-from MainWindow import MainWindow
-from Player import Player
-from PointsItem import PointsItem
 
 
-def table_dict_display(item: PointsItem, points: int):
+def table_dict_display(item: PointItem, points: int):
     item.set_status("potential")
     item.setText(str(points))
 
 
+# Encapsulates the main game functionalities.
 class Game:
     def __init__(self, _window: MainWindow, _players: list[Player]):
         self.window = _window
@@ -19,16 +20,38 @@ class Game:
         self.dice_list: list[Dice] = [self.window.dice_1, self.window.dice_2, self.window.dice_3, self.window.dice_4,
                                       self.window.dice_5]
         self.combo_checker: ComboChecker = ComboChecker(self.dice_list, self.__current_player)
+        self.table_dict: dict[str, int] = {}
 
     def roll(self):
+        # Increment roll number
         self.__current_player.roll_num += 1
+
+        # Clear table
         self.__current_player.clear_point_items()
+
+        # Roll dice
         for die in self.dice_list:
             if die.first_round:
                 die.first_round = False
             if not die.get_locked():
                 die.set_number(random.randint(1, 6))
-        self.display_items()
+            die.setHidden(False)
+
+        # Generate dictionary of possible point item table values
+        table_dict = self.combo_checker.generate_table_dict()
+
+        # Check if table dictionary has a length of zero
+        if len(table_dict) == 0:
+            table_dict = self.combo_checker.generate_zero_dict(self.__current_player.combo_dict)
+            if len(table_dict) == 0:
+                # TODO: Add win state
+                raise NotImplementedError
+
+        # Display table items
+        # TODO: Learn why items do not display after first roll of each turn
+        self.display_items(table_dict)
+
+        # Switch player
         if self.__current_player.roll_num > 3 or not self.__current_player.can_click:
             self.__current_player.clear_point_items()
             if self.__current_player.player_num == 1:
@@ -40,13 +63,12 @@ class Game:
 
     def set_current_player(self, _current_player: Player):
         self.__current_player = _current_player
-        self.window.player_label.set_current_player(self.__current_player)
         self.combo_checker.current_player = self.__current_player
 
-    def display_items(self):
-        table_dict = self.combo_checker.generate_table_dict()
+    def display_items(self, table_dict: [str, int]):
         for combo in table_dict.keys():
             if self.__current_player.player_num == 1:
+                # Switch statement to fill combos for Player 1
                 match combo:
                     case 'Aces':
                         table_dict_display(self.window.aces_player_one, table_dict[combo])
@@ -77,6 +99,7 @@ class Game:
                     case 'Yahtzee Bonus':
                         table_dict_display(self.window.yahtzee_bonus_player_one, table_dict[combo])
             else:
+                # Switch statement to fill combos for Player 2
                 match combo:
                     case 'Aces':
                         table_dict_display(self.window.aces_player_two, table_dict[combo])
@@ -106,6 +129,8 @@ class Game:
                         table_dict_display(self.window.chance_player_two, table_dict[combo])
                     case 'Yahtzee Bonus':
                         table_dict_display(self.window.yahtzee_bonus_player_two, table_dict[combo])
+
+        # Update upper bonus and upper/lower scores
         if self.__current_player.has_bonus:
             if self.__current_player.player_num == 1:
                 self.window.total_player_one.change_point_value(self.__current_player.upper_points + 35)
@@ -117,9 +142,12 @@ class Game:
             self.window.total_upper_player_one.change_point_value(self.players[0].upper_points)
             self.window.total_upper_player_two.change_point_value(self.players[1].upper_points)
 
+        # Update totals
         self.window.total_score_player_one.change_point_value(self.players[0].upper_points)
         self.window.total_score_player_two.change_point_value(self.players[1].upper_points)
         self.window.total_lower_player_one.change_point_value(self.players[0].lower_points)
         self.window.total_lower_player_two.change_point_value(self.players[1].lower_points)
-        self.window.grand_total_player_one.change_point_value(self.players[0].lower_points)
-        self.window.grand_total_player_two.change_point_value(self.players[1].lower_points)
+        self.window.grand_total_player_one.change_point_value(self.players[0].upper_points +
+                                                              self.players[0].lower_points)
+        self.window.grand_total_player_two.change_point_value(self.players[1].upper_points +
+                                                              self.players[1].lower_points)

@@ -1,7 +1,8 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Player import Player
+from PyQt5 import QtWidgets
+import Player
 
 
+# Encapsulates a label that shows the current player
 class PlayerLabel(QtWidgets.QLabel):
     def __init__(self, _parent: QtWidgets.QWidget, _current_player: Player):
         super().__init__()
