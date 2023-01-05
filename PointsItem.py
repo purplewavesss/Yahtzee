@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Player import Player
+from PyQt5 import QtGui, QtWidgets
+import Player
 
 not_combo: tuple = ("Total Score", "Total", "Total (Lower)", "Total (Upper)", "Grand Total")
 

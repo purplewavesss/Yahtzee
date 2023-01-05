@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Player import Player
+from PyQt5 import QtWidgets
+import Player
 
 
 class PlayerLabel(QtWidgets.QLabel):

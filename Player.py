@@ -19,4 +19,4 @@ class Player:
 
 
 # This is the dumbest fix I have ever done
-from PointsItem import PointsItem
+import PointsItem

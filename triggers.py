@@ -1,6 +1,6 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
-from MainWindow import MainWindow
+from PyQt5 import QtWidgets
+import MainWindow
 
 
 def implement_triggers(window: MainWindow):

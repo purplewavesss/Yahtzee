@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from MainWindow import MainWindow
 from triggers import implement_triggers
 from Game import Game

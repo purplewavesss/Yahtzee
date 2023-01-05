@@ -1,16 +1,19 @@
-import random
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PointsItem import PointsItem
-from Dice import Dice
+from PyQt5 import QtWidgets
+import Player
+import PlayerLabel
+import PointsItem
+import Dice
 
 
 class ScoreCard(QtWidgets.QTableWidget):
-    def __init__(self, _parent: QtWidgets.QWidget, _name: str, _dice_list: list[Dice]):
+    def __init__(self, _parent: QtWidgets.QWidget, _name: str, _dice_list: list[Dice], _player_label: PlayerLabel,
+                 _player_list: list[Player]):
         super().__init__()
         self.setParent(_parent)
         self.name: str = _name
         self.dice_list: list[Dice] = _dice_list
+        self.player_list: list[Player] = _player_list
+        self.player_label: PlayerLabel = _player_label
         self.itemClicked.connect(self.point_item_clicked)
         
     def point_item_clicked(self, item: PointsItem):
@@ -25,7 +28,15 @@ class ScoreCard(QtWidgets.QTableWidget):
             item.player.combo_dict[item.combo] = False
             item.player.can_click = False
             item.player.clear_point_items()
+            self.player_label.set_current_player(self.switch_player(item.player))
             for die in self.dice_list:
                 if die.get_locked():
                     die.set_locked(False)
-                die.set_number(random.randint(1, 6))
+            for x in range(len(self.dice_list)):
+                self.dice_list[x].set_number(x + 1)
+
+    def switch_player(self, _player: Player) -> Player:
+        if _player == self.player_list[0]:
+            return self.player_list[1]
+        else:
+            return self.player_list[0]

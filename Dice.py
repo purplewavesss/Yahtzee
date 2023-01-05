@@ -1,5 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Player import Player
+from PyQt5 import QtGui, QtWidgets
 
 
 class Dice(QtWidgets.QLabel):

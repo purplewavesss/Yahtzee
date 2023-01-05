@@ -1,9 +1,9 @@
 import random
+import Dice
+import MainWindow
+import Player
+import PointsItem
 from ComboChecker import ComboChecker
-from Dice import Dice
-from MainWindow import MainWindow
-from Player import Player
-from PointsItem import PointsItem
 
 
 def table_dict_display(item: PointsItem, points: int):
@@ -40,7 +40,6 @@ class Game:
 
     def set_current_player(self, _current_player: Player):
         self.__current_player = _current_player
-        self.window.player_label.set_current_player(self.__current_player)
         self.combo_checker.current_player = self.__current_player
 
     def display_items(self):

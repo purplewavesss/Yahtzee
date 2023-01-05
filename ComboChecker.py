@@ -1,6 +1,6 @@
-from Dice import Dice
+import Dice
+import Player
 from Indices import Indices
-from Player import Player
 
 FULL_HOUSE_POINTS: int = 25
 SMALL_STRAIGHT_POINTS: int = 30
