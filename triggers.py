@@ -23,6 +23,7 @@ def credits_action_triggered():
     credits_message_box = QtWidgets.QMessageBox()
     credits_message_box.setWindowTitle("Credits")
     credits_message_box.setIcon(QtWidgets.QMessageBox.Information)
-    credits_message_box.setText("Created by Gavin J. Grotegut\nBased on Yahtzee, a game by Milton Bradley")
+    credits_message_box.setText("Created by Gavin J. Grotegut\nBased on Yahtzee, a game by Milton Bradley\nCoded in "
+                                "Python\nDesigned in Qt, a GUI framework for C++ and Python")
     credits_message_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     credits_message_box.exec()

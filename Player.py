@@ -7,7 +7,8 @@ class Player:
         self.combo_dict: dict[str, bool] = {}
         self.has_yahtzee: bool = False
         self.has_bonus: bool = False
-        self.can_click = True
+        self.can_click: bool = True
+        self.can_roll: bool = True
         self.upper_points: int = 0
         self.lower_points: int = 0
         self.total_points: int = 0

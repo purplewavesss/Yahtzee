@@ -1,4 +1,5 @@
 import random
+from PyQt5 import QtWidgets
 import Dice
 import MainWindow
 import Player
@@ -21,8 +22,11 @@ class Game:
                                       self.window.dice_5]
         self.combo_checker: ComboChecker = ComboChecker(self.dice_list, self.__current_player)
         self.table_dict: dict[str, int] = {}
+        self.winner: Player
+        self.tie: bool = False
 
     def roll(self):
+        # TODO: Force players to choose a combo before the player switch
         # Increment roll number
         self.__current_player.roll_num += 1
 
@@ -44,8 +48,7 @@ class Game:
         if len(table_dict) == 0:
             table_dict = self.combo_checker.generate_zero_dict(self.__current_player.combo_dict)
             if len(table_dict) == 0:
-                # TODO: Add win state
-                raise NotImplementedError
+                self.game_end()
 
         # Display table items
         # TODO: Learn why items do not display after first roll of each turn
@@ -151,3 +154,28 @@ class Game:
                                                               self.players[0].lower_points)
         self.window.grand_total_player_two.change_point_value(self.players[1].upper_points +
                                                               self.players[1].lower_points)
+
+    def game_end(self):
+        # Check which player won
+        if self.window.grand_total_player_one.get_point_value() > self.window.grand_total_player_two.get_point_value():
+            self.winner = self.players[0]
+        elif self.window.grand_total_player_one.get_point_value() < self.window.grand_total_player_two.get_point_value():
+            self.winner = self.players[1]
+        else:
+            self.tie = True
+
+        # Display tie message box
+        if self.tie:
+            self.gen_win_box("It was a tie!")
+
+        # Display winner message box
+        else:
+            self.gen_win_box(f'Player {self.winner.player_num} won with {self.winner.total_points}!')
+
+    def gen_win_box(self, text: str):
+        win_message_box = QtWidgets.QMessageBox()
+        win_message_box.setWindowTitle("Winner")
+        win_message_box.setIcon(QtWidgets.QMessageBox.NoIcon)
+        win_message_box.setText(text)
+        win_message_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        win_message_box.exec()
