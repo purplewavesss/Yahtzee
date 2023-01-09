@@ -54,6 +54,7 @@ class ScoreCard(QtWidgets.QTableWidget):
                     if die.get_locked():
                         die.set_locked(False)
                     die.setHidden(True)
+
         except AttributeError:
             invalid_item_message_box = QtWidgets.QMessageBox()
             invalid_item_message_box.setWindowTitle("Invalid item box")
