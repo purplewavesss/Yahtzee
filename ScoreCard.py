@@ -38,7 +38,7 @@ class ScoreCard(QtWidgets.QTableWidget):
                 item.player.combo_dict[item.combo] = False
                 item.player.can_click = True
                 item.player.round_finished = True
-                item.player.clear_point_items()
+                item.player.clear_potential_point_items()
 
                 # Switch current player
                 self.player_label.set_current_player(self.switch_player(item.player))

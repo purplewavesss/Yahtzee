@@ -7,9 +7,9 @@ import PointItem
 from ComboChecker import ComboChecker
 
 
-def table_dict_display(item: PointItem, points: int):
-    item.set_status("potential")
-    item.setText(str(points))
+def table_dict_display(point_item: PointItem, points: int):
+    point_item.set_status("potential")
+    point_item.setText(str(points))
 
 
 def gen_win_box(text: str):
@@ -54,7 +54,7 @@ class Game:
             self.__current_player.roll_num += 1
 
             # Clear table
-            self.__current_player.clear_point_items()
+            self.__current_player.clear_potential_point_items()
 
             # Roll dice
             for die in self.dice_list:
@@ -71,7 +71,7 @@ class Game:
             if len(table_dict) == 0:
                 table_dict = self.combo_checker.generate_zero_dict(self.__current_player.combo_dict)
                 if len(table_dict) == 0:
-                    self.game_end()
+                    self.game_end(True)
 
             # Display table items
             self.display_items(table_dict)
@@ -174,26 +174,34 @@ class Game:
         self.window.grand_total_player_two.set_point_value(self.players[1].upper_points +
                                                            self.players[1].lower_points)
 
-    def game_end(self):
+    def game_end(self, show_winner: bool):
         # Clear point items
         for player in self.players:
-            player.clear_point_items()
+            player.erase_point_items()
+
+        # Reset roll button
+        self.window.roll_button.setText("Start Game")
+
+        # Hide dice
+        for die in self.dice_list:
+            die.setHidden(True)
 
         # Change current player to Player 1
         self.set_current_player(self.players[0])
 
-        # Check which player won
-        if self.window.grand_total_player_one.get_point_value() > self.window.grand_total_player_two.get_point_value():
-            self.winner = self.players[0]
-        elif self.window.grand_total_player_one.get_point_value() < self.window.grand_total_player_two.get_point_value():
-            self.winner = self.players[1]
-        else:
-            self.tie = True
+        if show_winner:
+            # Check which player won
+            if self.window.grand_total_player_one.get_point_value() > self.window.grand_total_player_two.get_point_value():
+                self.winner = self.players[0]
+            elif self.window.grand_total_player_one.get_point_value() < self.window.grand_total_player_two.get_point_value():
+                self.winner = self.players[1]
+            else:
+                self.tie = True
 
-        # Display tie message box
-        if self.tie:
-            gen_win_box("It was a tie!")
+            # Display tie message box
+            if self.tie:
+                gen_win_box("It was a tie!")
 
-        # Display winner message box
-        else:
-            gen_win_box(f'Player {self.winner.player_num} won with {self.winner.total_points} points!')
+            # Display winner message box
+            else:
+                gen_win_box(f'Player {self.winner.player_num} won with {self.winner.total_points} points!')

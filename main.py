@@ -16,7 +16,7 @@ def main():
     new_game = Game(window, [player_one, player_two])
 
     # Initialize menu items
-    implement_triggers(window)
+    implement_triggers(window, new_game)
 
     # Initialize roll button
     window.roll_button.clicked.connect(new_game.roll)
