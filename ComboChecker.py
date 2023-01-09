@@ -1,6 +1,6 @@
-from Dice import Dice
+import Dice
+import Player
 from Indices import Indices
-from Player import Player
 
 FULL_HOUSE_POINTS: int = 25
 SMALL_STRAIGHT_POINTS: int = 30
@@ -8,6 +8,7 @@ LARGE_STRAIGHT_POINTS: int = 40
 YAHTZEE_POINTS: int = 50
 
 
+# Encapsulates a checker for potential Yahtzee combos
 class ComboChecker:
     def __init__(self, _dice_list: list[Dice], _current_player: Player):
         self.dice_list: list[Dice] = _dice_list
@@ -48,42 +49,55 @@ class ComboChecker:
         # Check aces
         points = self.aces()
         points_dict.update({"Aces": points})
+
         # Check twos
         points = self.twos()
         points_dict.update({"Twos": points})
+
         # Check threes
         points = self.threes()
         points_dict.update({"Threes": points})
+
         # Check fours
         points = self.fours()
         points_dict.update({"Fours": points})
+
         # Check fives
         points = self.fives()
         points_dict.update({"Fives": points})
+
         # Check sixes
         points = self.sixes()
         points_dict.update({"Sixes": points})
+
         # Check for threes of a kind
         points = self.three_of_a_kind()
         points_dict.update({"3 of a Kind": points})
+
         # Check for fours of a kind
         points = self.four_of_a_kind()
         points_dict.update({"4 of a Kind": points})
+
         # Check for full house
         points = self.full_house()
         points_dict.update({"Full House": points})
+
         # Check for small straight
         points = self.small_straight()
         points_dict.update({"Small Straight": points})
+
         # Check for large straight
         points = self.large_straight()
         points_dict.update({"Large Straight": points})
+
         # Check for yahtzee
         points = self.yahtzee()
         points_dict.update({"Yahtzee": points})
+
         # Check for chance
         points = self.chance()
         points_dict.update({"Chance": points})
+
         # Check for yahtzee bonus
         points = self.yahtzee_bonus()
         points_dict.update({"Yahtzee Bonus": points})
@@ -187,6 +201,7 @@ class ComboChecker:
 
     def bonus(self) -> int:
         if self.current_player.upper_points >= 63:
+            self.current_player.has_bonus = True
             return 35
         else:
             return 0
@@ -195,7 +210,16 @@ class ComboChecker:
         self.num_check()
         table_dict: dict[str, int] = {}
         roll_dict: dict[str, int] = self.check()
+
+        # Creates a dictionary containing combo names and combo point values
         for combo in roll_dict.keys():
             if roll_dict[combo] != 0 and self.current_player.combo_dict[combo]:
                 table_dict.update({combo: roll_dict[combo]})
+        return table_dict
+
+    def generate_zero_dict(self, combo_dict: dict[str, bool]):
+        table_dict: dict[str, int] = {}
+        for combo in combo_dict.keys():
+            if combo_dict[combo]:
+                table_dict.update({combo: 0})
         return table_dict

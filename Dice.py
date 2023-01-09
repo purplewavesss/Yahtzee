@@ -1,7 +1,7 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from Player import Player
+from PyQt5 import QtGui, QtWidgets
 
 
+# Encapsulates a die that can be either locked or unlocked.
 class Dice(QtWidgets.QLabel):
     def __init__(self, _parent: QtWidgets.QWidget, _pixmap: QtGui.QPixmap, _number: int):
         super().__init__()

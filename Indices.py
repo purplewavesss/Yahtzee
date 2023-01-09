@@ -1,6 +1,7 @@
 from enum import Enum
 
 
+# Enumeration for ComboChecker indexes
 class Indices(Enum):
     ACE_INDEX: int = 0
     TWOS_INDEX: int = 1

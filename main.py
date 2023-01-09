@@ -1,11 +1,12 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from MainWindow import MainWindow
 from triggers import implement_triggers
 from Game import Game
 from Player import Player
 
 
+# Initializes and displays game
 def main():
     # Initialize MainWindow, app, and Game
     app = QtWidgets.QApplication(sys.argv)
@@ -18,7 +19,7 @@ def main():
     implement_triggers(window)
 
     # Initialize roll button
-    window.roll_button.clicked.connect(lambda: new_game.roll())
+    window.roll_button.clicked.connect(new_game.roll)
 
     # Open window
     window.show()
