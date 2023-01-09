@@ -12,12 +12,28 @@ class Player:
         self.upper_points: int = 0
         self.lower_points: int = 0
         self.total_points: int = 0
-        self.points_items_list: list[PointItem] = []
+        self.point_items_list: list[PointItem] = []
 
-    def clear_point_items(self):
-        for x in range(len(self.points_items_list)):
-            if self.points_items_list[x].get_status() == "potential":
-                self.points_items_list[x].set_status("hidden")
+    def clear_potential_point_items(self):
+        for point_item in self.point_items_list:
+            status = point_item.get_status()
+            if status == "potential":
+                point_item.set_status("hidden")
+
+    def erase_point_items(self):
+        for point_item in self.point_items_list:
+            point_item.set_status("hidden")
+            point_item.set_point_value(0)
+
+    def reset(self):
+        self.roll_num: int = 0
+        self.has_yahtzee = False
+        self.has_bonus = False
+        self.can_click = True
+        self.round_finished = False
+        self.upper_points = 0
+        self.lower_points = 0
+        self.total_points = 0
 
 
 # This is the dumbest fix I have ever done

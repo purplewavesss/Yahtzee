@@ -1,12 +1,13 @@
 import sys
-from PyQt5 import QtWidgets
 import MainWindow
+import Game
+from PyQt5 import QtWidgets
 
 
 # Contains triggers that give functionality to the main menu.
-def implement_triggers(window: MainWindow):
+def implement_triggers(window: MainWindow, game: Game):
     window.exit_action.triggered.connect(exit_action_triggered)
-    window.new_game_action.triggered.connect(new_game_action_triggered)
+    window.new_game_action.triggered.connect(lambda: new_game_action_triggered(game))
     window.credits_action.triggered.connect(credits_action_triggered)
 
 
@@ -14,9 +15,10 @@ def exit_action_triggered():
     sys.exit()
 
 
-def new_game_action_triggered():
-    # TODO: Add new game functionality
-    raise NotImplementedError("Not added yet!")
+def new_game_action_triggered(game: Game):
+    game.game_end(False)
+    for player in game.players:
+        player.reset()
 
 
 def credits_action_triggered():

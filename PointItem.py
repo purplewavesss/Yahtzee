@@ -13,7 +13,7 @@ class PointItem(QtWidgets.QTableWidgetItem):
         self.player: Player = _player
         self.__point_value: int = 0
         self.__status: str = "hidden"
-        self.player.points_items_list.append(self)
+        self.player.point_items_list.append(self)
         self.add_to_combo_dict()
         self.setText("")
 
