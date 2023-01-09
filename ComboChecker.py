@@ -201,6 +201,7 @@ class ComboChecker:
 
     def bonus(self) -> int:
         if self.current_player.upper_points >= 63:
+            self.current_player.has_bonus = True
             return 35
         else:
             return 0

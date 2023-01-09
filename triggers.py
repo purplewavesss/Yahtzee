@@ -16,7 +16,7 @@ def exit_action_triggered():
 
 def new_game_action_triggered():
     # TODO: Add new game functionality
-    raise NotImplementedError
+    raise NotImplementedError("Not added yet!")
 
 
 def credits_action_triggered():

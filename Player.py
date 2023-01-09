@@ -8,7 +8,7 @@ class Player:
         self.has_yahtzee: bool = False
         self.has_bonus: bool = False
         self.can_click: bool = True
-        self.can_roll: bool = True
+        self.round_finished: bool = False
         self.upper_points: int = 0
         self.lower_points: int = 0
         self.total_points: int = 0

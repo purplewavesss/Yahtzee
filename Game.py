@@ -12,7 +12,16 @@ def table_dict_display(item: PointItem, points: int):
     item.setText(str(points))
 
 
+def gen_win_box(text: str):
+    win_message_box = QtWidgets.QMessageBox()
+    win_message_box.setWindowTitle("Winner")
+    win_message_box.setIcon(QtWidgets.QMessageBox.NoIcon)
+    win_message_box.setText(text)
+    win_message_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
+    win_message_box.exec()
+
 # Encapsulates the main game functionalities.
+
 class Game:
     def __init__(self, _window: MainWindow, _players: list[Player]):
         self.window = _window
@@ -22,41 +31,14 @@ class Game:
                                       self.window.dice_5]
         self.combo_checker: ComboChecker = ComboChecker(self.dice_list, self.__current_player)
         self.table_dict: dict[str, int] = {}
-        self.winner: Player
+        self.winner: Player = None
         self.tie: bool = False
+        for die in self.dice_list:
+            die.setHidden(True)
 
     def roll(self):
-        # TODO: Force players to choose a combo before the player switch
-        # Increment roll number
-        self.__current_player.roll_num += 1
-
-        # Clear table
-        self.__current_player.clear_point_items()
-
-        # Roll dice
-        for die in self.dice_list:
-            if die.first_round:
-                die.first_round = False
-            if not die.get_locked():
-                die.set_number(random.randint(1, 6))
-            die.setHidden(False)
-
-        # Generate dictionary of possible point item table values
-        table_dict = self.combo_checker.generate_table_dict()
-
-        # Check if table dictionary has a length of zero
-        if len(table_dict) == 0:
-            table_dict = self.combo_checker.generate_zero_dict(self.__current_player.combo_dict)
-            if len(table_dict) == 0:
-                self.game_end()
-
-        # Display table items
-        # TODO: Learn why items do not display after first roll of each turn
-        self.display_items(table_dict)
-
         # Switch player
-        if self.__current_player.roll_num > 3 or not self.__current_player.can_click:
-            self.__current_player.clear_point_items()
+        if self.__current_player.round_finished:
             if self.__current_player.player_num == 1:
                 self.set_current_player(self.players[1])
             else:
@@ -64,9 +46,46 @@ class Game:
             self.__current_player.roll_num = 0
             self.__current_player.can_click = True
 
+        if self.__current_player.can_click:
+            # Rename button label
+            self.window.roll_button.setText("Roll!")
+
+            # Increment roll number
+            self.__current_player.roll_num += 1
+
+            # Clear table
+            self.__current_player.clear_point_items()
+
+            # Roll dice
+            for die in self.dice_list:
+                if die.first_round:
+                    die.first_round = False
+                if not die.get_locked():
+                    die.set_number(random.randint(1, 6))
+                die.setHidden(False)
+
+            # Generate dictionary of possible point item table values
+            table_dict = self.combo_checker.generate_table_dict()
+
+            # Check if table dictionary has a length of zero
+            if len(table_dict) == 0:
+                table_dict = self.combo_checker.generate_zero_dict(self.__current_player.combo_dict)
+                if len(table_dict) == 0:
+                    self.game_end()
+
+            # Display table items
+            self.display_items(table_dict)
+
+            if self.__current_player.roll_num == 3:
+                self.__current_player.can_click = False
+
+        else:
+            self.window.roll_button.setText("Can't roll!")
+
     def set_current_player(self, _current_player: Player):
         self.__current_player = _current_player
         self.combo_checker.current_player = self.__current_player
+        self.window.player_label.set_current_player(self.__current_player)
 
     def display_items(self, table_dict: [str, int]):
         for combo in table_dict.keys():
@@ -136,26 +155,33 @@ class Game:
         # Update upper bonus and upper/lower scores
         if self.__current_player.has_bonus:
             if self.__current_player.player_num == 1:
-                self.window.total_player_one.change_point_value(self.__current_player.upper_points + 35)
-                self.window.total_upper_player_one.change_point_value(self.__current_player.upper_points + 35)
+                self.window.total_player_one.set_point_value(self.__current_player.upper_points + 35)
+                self.window.total_upper_player_one.set_point_value(self.__current_player.upper_points + 35)
             else:
-                self.window.total_player_two.change_point_value(self.__current_player.upper_points + 35)
-                self.window.total_upper_player_two.change_point_value(self.__current_player.upper_points + 35)
+                self.window.total_player_two.set_point_value(self.__current_player.upper_points + 35)
+                self.window.total_upper_player_two.set_point_value(self.__current_player.upper_points + 35)
         else:
-            self.window.total_upper_player_one.change_point_value(self.players[0].upper_points)
-            self.window.total_upper_player_two.change_point_value(self.players[1].upper_points)
+            self.window.total_upper_player_one.set_point_value(self.players[0].upper_points)
+            self.window.total_upper_player_two.set_point_value(self.players[1].upper_points)
 
         # Update totals
-        self.window.total_score_player_one.change_point_value(self.players[0].upper_points)
-        self.window.total_score_player_two.change_point_value(self.players[1].upper_points)
-        self.window.total_lower_player_one.change_point_value(self.players[0].lower_points)
-        self.window.total_lower_player_two.change_point_value(self.players[1].lower_points)
-        self.window.grand_total_player_one.change_point_value(self.players[0].upper_points +
-                                                              self.players[0].lower_points)
-        self.window.grand_total_player_two.change_point_value(self.players[1].upper_points +
-                                                              self.players[1].lower_points)
+        self.window.total_score_player_one.set_point_value(self.players[0].upper_points)
+        self.window.total_score_player_two.set_point_value(self.players[1].upper_points)
+        self.window.total_lower_player_one.set_point_value(self.players[0].lower_points)
+        self.window.total_lower_player_two.set_point_value(self.players[1].lower_points)
+        self.window.grand_total_player_one.set_point_value(self.players[0].upper_points +
+                                                           self.players[0].lower_points)
+        self.window.grand_total_player_two.set_point_value(self.players[1].upper_points +
+                                                           self.players[1].lower_points)
 
     def game_end(self):
+        # Clear point items
+        for player in self.players:
+            player.clear_point_items()
+
+        # Change current player to Player 1
+        self.set_current_player(self.players[0])
+
         # Check which player won
         if self.window.grand_total_player_one.get_point_value() > self.window.grand_total_player_two.get_point_value():
             self.winner = self.players[0]
@@ -166,16 +192,8 @@ class Game:
 
         # Display tie message box
         if self.tie:
-            self.gen_win_box("It was a tie!")
+            gen_win_box("It was a tie!")
 
         # Display winner message box
         else:
-            self.gen_win_box(f'Player {self.winner.player_num} won with {self.winner.total_points}!')
-
-    def gen_win_box(self, text: str):
-        win_message_box = QtWidgets.QMessageBox()
-        win_message_box.setWindowTitle("Winner")
-        win_message_box.setIcon(QtWidgets.QMessageBox.NoIcon)
-        win_message_box.setText(text)
-        win_message_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        win_message_box.exec()
+            gen_win_box(f'Player {self.winner.player_num} won with {self.winner.total_points} points!')

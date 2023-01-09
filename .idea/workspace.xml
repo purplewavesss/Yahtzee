@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb4ab99f-83e7-4758-833a-3e6b905f276f" name="Changes" comment="Further increased gameplay functionality and increased the number of comments">
+    <list default="true" id="cb4ab99f-83e7-4758-833a-3e6b905f276f" name="Changes" comment="Game loop is (mostly) done :O">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PointItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/PointItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScoreCard.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScoreCard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/triggers.py" beforeDir="false" afterPath="$PROJECT_DIR$/triggers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672978352775</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Game loop is (mostly) done :O">
+      <created>1673140726152</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673140726152</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -98,6 +108,7 @@
     <MESSAGE value="Furthered the implementation of gameplay, added more comments, and renamed &quot;PointsItem&quot; to &quot;PointItem&quot;" />
     <MESSAGE value="Changed a bunch of imports, fixed player switching" />
     <MESSAGE value="Further increased gameplay functionality and increased the number of comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Further increased gameplay functionality and increased the number of comments" />
+    <MESSAGE value="Game loop is (mostly) done :O" />
+    <option name="LAST_COMMIT_MESSAGE" value="Game loop is (mostly) done :O" />
   </component>
 </project>

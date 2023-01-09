@@ -1,7 +1,7 @@
 from PyQt5 import QtGui, QtWidgets
 import Player
 
-not_combo: tuple = ("Total Score", "Total", "Total (Lower)", "Total (Upper)", "Grand Total")
+NOT_COMBO: tuple = ("Total Score", "Total", "Total (Lower)", "Total (Upper)", "Grand Total")
 
 
 # Encapsulates a PointItem, which is a table item containing a point value. This point value can be hidden or shown
@@ -40,11 +40,11 @@ class PointItem(QtWidgets.QTableWidgetItem):
     def get_point_value(self):
         return self.__point_value
 
-    def change_point_value(self, _point_value: int):
+    def set_point_value(self, _point_value: int):
         self.__point_value = _point_value
         if self.__status != "hidden":
             self.setText(str(self.__point_value))
 
     def add_to_combo_dict(self):
-        if self.combo not in not_combo:
+        if self.combo not in NOT_COMBO:
             self.player.combo_dict.update({self.combo: True})
